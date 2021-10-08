@@ -18,4 +18,6 @@ public class Role extends AbstractIdentity{
 
     @Enumerated(EnumType.STRING)
     private RoleType roles;
+
+
 }

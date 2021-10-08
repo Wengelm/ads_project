@@ -1,7 +1,6 @@
 package com.senla.ads.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -10,7 +9,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_category")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Category extends AbstractIdentity {
 
     @OneToOne(mappedBy = "category")
