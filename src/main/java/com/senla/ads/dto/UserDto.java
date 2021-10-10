@@ -11,7 +11,7 @@ import java.util.Set;
 public class UserDto {
 
     @NotNull
-    @Size(min = 3, max = 15)
+    @Size(min = 3, max = 15, message = "Login must be not empty")
     private String login;
     private String name;
     private String surname;

@@ -24,6 +24,16 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment update(Comment comment) {
+        return null;
+    }
+
+    @Override
+    public Comment getCategoryById(Long id) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
         commentRepository.deleteById(id);
     }

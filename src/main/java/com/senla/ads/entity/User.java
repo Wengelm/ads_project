@@ -15,6 +15,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@SecondaryTable(name = "t_rating", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id"))
 public class User extends AbstractIdentity {
     @Column(unique = true)
     private String login;
@@ -24,6 +25,7 @@ public class User extends AbstractIdentity {
     private String name;
     private String surname;
     private String age;
+    @Column(name = "rating", table = "t_rating")
     private double rating;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Ad> ads = new HashSet<>();
@@ -34,4 +36,9 @@ public class User extends AbstractIdentity {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(mappedBy = "onUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviewsOnUser = new HashSet<>();
+    @OneToMany(mappedBy = "byUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Review> reviewsByUser = new HashSet<>();
+
 }

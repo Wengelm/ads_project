@@ -21,8 +21,9 @@ public class Ad extends AbstractIdentity{
     private String title;
     private String description;
     private LocalDate createdDate;
-    @Enumerated(EnumType.STRING)
-    private AdStatus status;
+    @OneToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -31,5 +32,7 @@ public class Ad extends AbstractIdentity{
     private Category category;
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Review> reviews = new ArrayList<>();
 
 }

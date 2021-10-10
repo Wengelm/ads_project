@@ -15,6 +15,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category update(Category category) {
+        return null;
+    }
+
+    @Override
+    public Category getCategoryById(Long id) {
+        return null;
+    }
+
+    @Override
     public void delete(Long id) {
 
     }

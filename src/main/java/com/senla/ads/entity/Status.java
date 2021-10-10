@@ -7,18 +7,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "t_roles")
-@Setter
+@Table(name = "t_status")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role extends AbstractIdentity{
+public class Status extends AbstractIdentity {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private RoleType roles;
-
-
+    private AdStatus name;
+    @OneToOne(mappedBy = "status")
+    private Ad ad;
 }
