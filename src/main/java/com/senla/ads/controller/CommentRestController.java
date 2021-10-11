@@ -26,7 +26,6 @@ public class CommentRestController {
     @PostMapping("/addComment")
     public CommentDto addComment(@Validated  @RequestBody CommentDto comment) {
         Comment newComment= modelMapper.map(comment, Comment.class);
-        System.out.println(newComment.getUser().getId());
         commentService.save(newComment);
 
         return modelMapper.map(newComment, CommentDto.class);

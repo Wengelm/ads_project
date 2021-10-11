@@ -1,20 +1,23 @@
 package com.senla.ads.dto;
 
-import com.senla.ads.entity.AdStatus;
 import lombok.Data;
 
+
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class AdDto {
+
     private Long id;
+    @NotNull
     private String title;
+    @NotNull
     private String description;
-    private LocalDate createdDate;
-    private AdStatus status;
+    private CategoryDto category;
     private UserDto user;
-    private List<CommentDto> comments = new ArrayList<>();
+    private LocalDate createdDate;
+    private StatusDto status;
+
 
 }

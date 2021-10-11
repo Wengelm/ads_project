@@ -21,18 +21,24 @@ public class Ad extends AbstractIdentity{
     private String title;
     private String description;
     private LocalDate createdDate;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
     @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Comment> comments = new ArrayList<>();
-    @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<Review> reviews = new ArrayList<>();
 
+    public Ad(String title, String description, LocalDate createdDate, Status status, User user, Category category) {
+        this.title = title;
+        this.description = description;
+        this.createdDate = LocalDate.now();
+        this.status = new Status(AdStatus.NEW);
+        this.user = user;
+        this.category = category;
+    }
 }

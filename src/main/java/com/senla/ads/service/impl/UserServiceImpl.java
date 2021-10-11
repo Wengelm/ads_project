@@ -89,11 +89,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User removeRole(Long id, String role) {
         User user = userRepository.getById(id);
-        try{
+        try {
             Role role1 = user.getRoles().stream().filter(role2 -> role2.getRoles().equals(RoleType.valueOf(role))).findFirst().get();
             user.getRoles().remove(role1);
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             throw new NoElemenPresent(id);
         }
 

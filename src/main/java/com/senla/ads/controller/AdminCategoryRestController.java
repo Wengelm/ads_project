@@ -23,6 +23,13 @@ public class AdminCategoryRestController {
     @Autowired
     private ModelMapper modelMapper;
 
+    @PostMapping("/create")
+    public CategoryDto createCategory(@Valid @RequestBody CategoryDto categoryDto) {
+        Category category = modelMapper.map(categoryDto, Category.class);
+        categoryService.save(category);
+        return modelMapper.map(category, CategoryDto.class);
+    }
+
     @DeleteMapping("delete/{id}")
     public String deleteCategory(@PathVariable("id") @NotNull @Min(1) Long id) {
         categoryService.delete(id);

@@ -17,6 +17,6 @@ public class Status extends AbstractIdentity {
 
     @Enumerated(EnumType.STRING)
     private AdStatus name;
-    @OneToOne(mappedBy = "status")
-    private Ad ad;
+
+
 }

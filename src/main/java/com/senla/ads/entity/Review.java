@@ -23,7 +23,4 @@ public class Review  extends AbstractIdentity{
     @ManyToOne
     @JoinColumn(name = "user_reviewer_id")
     private User byUser;
-    @ManyToOne
-    @JoinColumn(name = "ad_id")
-    private Ad ad;
 }

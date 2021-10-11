@@ -30,12 +30,7 @@ public class CategoryRestController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @PostMapping("/create")
-    public CategoryDto creatCategory(@Valid @RequestBody CategoryDto categoryDto) {
-        Category category = modelMapper.map(categoryDto, Category.class);
-        categoryService.save(category);
-        return modelMapper.map(category, CategoryDto.class);
-    }
+
 
 
 

@@ -1,5 +1,6 @@
 package com.senla.ads.service.impl;
 
+import com.senla.ads.entity.Ad;
 import com.senla.ads.entity.Comment;
 import com.senla.ads.repository.CommentRepository;
 import com.senla.ads.service.CommentService;
@@ -25,13 +26,22 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment update(Comment comment) {
-        return null;
+
+        Comment com = commentRepository.findById(comment.getId()).orElseThrow();
+        com.setText(comment.getText());
+        return com;
     }
 
     @Override
-    public Comment getCategoryById(Long id) {
-        return null;
+    public Comment getCommentById(Long id) {
+        return commentRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public List<Ad> getCommentByAd(Ad ad) {
+        return commentRepository.getCommentByAd(ad.getId());
+    }
+
 
     @Override
     public void delete(Long id) {
