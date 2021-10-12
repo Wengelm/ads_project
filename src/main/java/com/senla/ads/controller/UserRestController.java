@@ -7,6 +7,8 @@ import com.senla.ads.entity.User;
 import com.senla.ads.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +54,7 @@ public class UserRestController {
 
     @GetMapping("/all")
     public List<UserDto> getAllUsests(){
-        return userService.findAll()
+         return userService.findAll()
                 .stream()
                 .map(entity -> modelMapper.map(entity, UserDto.class))
                 .collect(Collectors.toList());

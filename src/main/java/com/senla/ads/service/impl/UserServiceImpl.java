@@ -60,6 +60,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.getById(id);
     }
 
+    @Override
+    public User getUserByLogin(String login) {
+        return userRepository.getUserByLogin(login);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
 
     @Override
     public void delete(Long id) {

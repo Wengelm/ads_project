@@ -13,6 +13,11 @@ public interface UserService {
 
     User getUserById(Long id);
 
+    User getUserByLogin(String login);
+
+    User getUserByEmail(String email);
+
+
     void delete(Long id);
 
     List<User> findAll();

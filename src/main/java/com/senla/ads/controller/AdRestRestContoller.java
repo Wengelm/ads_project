@@ -7,6 +7,9 @@ import com.senla.ads.service.AdService;
 import com.senla.ads.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,9 +52,11 @@ public class AdRestRestContoller {
 
     @PostMapping("/add")
     public AdDto addNewAd(@Valid @RequestBody AdDto adDto) {
-
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
         Ad ad = modelMapper.map(adDto, Ad.class);
-        ad.setUser(userService.getUserById(20L));
+        ad.setUser(userService.getUserByLogin(userDetails.getUsername()));
         adService.save(ad);
         return modelMapper.map(ad, AdDto.class);
 
@@ -59,17 +64,18 @@ public class AdRestRestContoller {
 
     @PostMapping("/changestatus")
     public AdDto changestatus(@Valid @RequestParam("id") Long id) {
-          Ad ad = adService.comleteAd(id);
-        System.out.println(ad.getStatus().getName());
+        Ad ad = adService.comleteAd(id);
         return modelMapper.map(ad, AdDto.class);
 
     }
 
     @PostMapping("/update")
     public AdDto update(@Valid @RequestBody AdDto adDto) {
-
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getPrincipal();
         Ad ad = modelMapper.map(adDto, Ad.class);
-        ad.setUser(userService.getUserById(1L));
+        ad.setUser(userService.getUserByLogin(userDetails.getUsername()));
         adService.update(ad);
         return modelMapper.map(ad, AdDto.class);
 
