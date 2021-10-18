@@ -1,9 +1,6 @@
 package com.senla.ads.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -18,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Review  extends AbstractIdentity implements Serializable {
 
     @Serial
