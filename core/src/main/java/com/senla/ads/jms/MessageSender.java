@@ -1,5 +1,6 @@
 package com.senla.ads.jms;
 
+import com.senla.ads.entity.OrderDetails;
 import com.senla.ads.entity.Review;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class MessageSender {
     public void sendReview(Review review)
     {
         this.kafkaTemplate.send("reviews", review);
+    }
+
+    public void sendOrderDetails(OrderDetails orderDetails)
+    {
+        this.kafkaTemplate.send("orders", orderDetails);
     }
 }

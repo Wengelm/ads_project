@@ -12,12 +12,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Abstract class with  <b>id</b>.
- * @autor Pavel Zazulinski
- * @version 1.0
- */
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -27,12 +21,8 @@ public class Ad extends AbstractIdentity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 2330L;
-
-    /** Tiitle of ADS*/
     private String title;
-    /** description */
     private String description;
-    /** date when created */
     private LocalDate createdDate;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
@@ -43,19 +33,5 @@ public class Ad extends AbstractIdentity implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne( cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
-    private Category category;
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(mappedBy = "ad", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    public List<Comment> comments = new ArrayList<>();
 
-    public Ad(String title, String description, LocalDate createdDate, Status status, User user, Category category) {
-        this.title = title;
-        this.description = description;
-        this.createdDate = LocalDate.now();
-        this.status = new Status(AdStatus.NEW);
-        this.user = user;
-        this.category = category;
-    }
 }
