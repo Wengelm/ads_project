@@ -28,6 +28,9 @@ public class Ad extends AbstractIdentity implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_status_id")
+    private AdPaymentStatus adPaymentStatus;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;

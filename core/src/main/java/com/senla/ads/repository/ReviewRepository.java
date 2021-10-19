@@ -14,6 +14,6 @@ import java.util.List;
 @Transactional
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query("SELECT rw FROM Review rw  WHERE rw.byUser = :user")
-    public List<Review> getByReviewerUser(@Param("user") User user);
+    @Query("SELECT rw FROM Review rw  WHERE rw.onUser.login = :login")
+    public List<Review> getByReviewerUser(@Param("login") String login);
 }

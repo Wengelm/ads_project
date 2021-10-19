@@ -17,7 +17,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @SecondaryTable(name = "t_rating", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id"))
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User extends AbstractIdentity  implements Serializable {
@@ -52,5 +51,8 @@ public class User extends AbstractIdentity  implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "byUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Review> reviewsByUser = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<OrderDetails> orderDetails = new HashSet<>();
 
 }

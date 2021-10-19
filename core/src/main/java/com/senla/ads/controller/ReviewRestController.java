@@ -6,8 +6,11 @@ import com.senla.ads.entity.Review;
 import com.senla.ads.entity.User;
 import com.senla.ads.service.ReviewService;
 import com.senla.ads.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/review")
+@SecurityRequirement(name = "bearerAuth")
 public class ReviewRestController {
 
     @Autowired
@@ -29,9 +33,11 @@ public class ReviewRestController {
 
     @PostMapping("/add")
     public ReviewDto addReview(@Valid @RequestBody ReviewDto reviewDto){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
         Review review = modelMapper.map(reviewDto,Review.class);
-        review.setByUser(userService.getUserById(20L));
-        review.setOnUser(userService.getUserById(1L));
+        review.setByUser(userService.getUserByLogin(userDetails.getUsername()));
+        review.setOnUser(userService.getUserByLogin(reviewDto.getOnUser().getLogin()));
         reviewService.save(review);
         return  modelMapper.map(review,ReviewDto.class);
     }

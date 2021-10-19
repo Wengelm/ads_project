@@ -2,6 +2,7 @@ package com.senla.ads.service.impl;
 
 import com.senla.ads.entity.Review;
 import com.senla.ads.entity.User;
+import com.senla.ads.exception.MyEntityNotFoundException;
 import com.senla.ads.jms.MessageSender;
 import com.senla.ads.repository.ReviewRepository;
 import com.senla.ads.service.ReviewService;
@@ -30,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review update(Review r) {
-        Review review = reviewRepository.getById(r.getId());
+        Review review = reviewRepository.findById(r.getId()).orElseThrow(() -> new MyEntityNotFoundException(r.getId()));;
         review.setText(r.getText());
         review.setGrade(r.getGrade());
         reviewRepository.save(review);
@@ -44,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<Review> getReviewsByUser(User user) {
-        return reviewRepository.getByReviewerUser(user);
+        return reviewRepository.getByReviewerUser(user.getLogin());
     }
 
     @Override

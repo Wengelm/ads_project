@@ -23,15 +23,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeUserRating(User user) {
+
         List<Review> reviews = reviewRepository.getByReviewerUser(user.getId());
 
-        System.out.println(reviews);
-
         double countUserGrade = reviews.stream().mapToInt(Review::getGrade).sum();
-        System.out.println(countUserGrade);
         double tmpUserRating = countUserGrade / reviews.size();
-        System.out.println(tmpUserRating);
-
         user.setRating(tmpUserRating);
 
         userRepository.save(user);

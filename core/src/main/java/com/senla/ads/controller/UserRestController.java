@@ -6,9 +6,9 @@ import com.senla.ads.dto.request.EntityIdRequest;
 import com.senla.ads.dto.request.UserRegisterRequest;
 import com.senla.ads.entity.User;
 import com.senla.ads.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/user")
-@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class UserRestController {
 
     @Autowired

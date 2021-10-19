@@ -1,13 +1,15 @@
 package com.senla.ads.entity;
 
-public enum RoleType {
-    USER ("USER"),
-    ADMIN ("ADMIN");
+public enum OrderStatus {
+    NEW("NEW"),
+    PAID("PAID"),
+    WAIT_PAID("WAINTING PAID");
+
 
 
     private final String name;
 
-    private RoleType(String s) {
+    private OrderStatus(String s) {
         name = s;
     }
 
@@ -15,5 +17,4 @@ public enum RoleType {
     public String toString() {
         return this.name;
     }
-
 }

@@ -36,7 +36,8 @@ public class AdServiceImpl implements AdService {
 
     @Override
     public Ad update(Ad ad) {
-        Ad a = adRepository.findById(ad.getId()).orElseThrow();
+        Ad a = adRepository.findById(ad.getId())
+                .orElseThrow(() -> new MyEntityNotFoundException(ad.getId()));;
         a.setDescription(ad.getDescription());
         a.setTitle(ad.getDescription());
         return adRepository.save(ad);

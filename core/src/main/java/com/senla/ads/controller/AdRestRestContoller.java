@@ -5,6 +5,7 @@ import com.senla.ads.dto.request.UserLoginRequest;
 import com.senla.ads.entity.Ad;
 import com.senla.ads.service.AdService;
 import com.senla.ads.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/ad")
-@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class AdRestRestContoller {
 
     @Autowired
@@ -72,8 +73,7 @@ public class AdRestRestContoller {
     @PostMapping("/update")
     public AdDto update(@Valid @RequestBody AdDto adDto) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+                .getAuthentication().getPrincipal();
         Ad ad = modelMapper.map(adDto, Ad.class);
         ad.setUser(userService.getUserByLogin(userDetails.getUsername()));
         adService.update(ad);

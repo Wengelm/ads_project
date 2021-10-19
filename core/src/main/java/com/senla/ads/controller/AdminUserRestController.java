@@ -1,13 +1,14 @@
 package com.senla.ads.controller;
 
 import com.senla.ads.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/admin/user")
-@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class AdminUserRestController {
 
     @Autowired

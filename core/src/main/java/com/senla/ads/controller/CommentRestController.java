@@ -4,6 +4,7 @@ package com.senla.ads.controller;
 import com.senla.ads.dto.CommentDto;
 import com.senla.ads.entity.Comment;
 import com.senla.ads.service.CommentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/comment", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json;charset=UTF-8")
+@RequestMapping(value = "/comment")
+@SecurityRequirement(name = "bearerAuth")
 public class CommentRestController {
 
     @Autowired

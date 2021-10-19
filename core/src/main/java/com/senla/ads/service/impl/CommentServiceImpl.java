@@ -2,6 +2,7 @@ package com.senla.ads.service.impl;
 
 import com.senla.ads.entity.Ad;
 import com.senla.ads.entity.Comment;
+import com.senla.ads.exception.MyEntityNotFoundException;
 import com.senla.ads.repository.CommentRepository;
 import com.senla.ads.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment update(Comment comment) {
 
-        Comment com = commentRepository.findById(comment.getId()).orElseThrow();
+        Comment com = commentRepository.findById(comment.getId())
+                .orElseThrow(() -> new MyEntityNotFoundException(comment.getId()));;
         com.setText(comment.getText());
         return com;
     }

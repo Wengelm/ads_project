@@ -3,6 +3,7 @@ package com.senla.ads.controller;
 import com.senla.ads.dto.CategoryDto;
 import com.senla.ads.entity.Category;
 import com.senla.ads.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping(value = "/admin/category")
-@Validated
+@SecurityRequirement(name = "bearerAuth")
 public class AdminCategoryRestController {
 
     @Autowired

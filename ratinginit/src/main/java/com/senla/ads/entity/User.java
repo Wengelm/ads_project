@@ -34,14 +34,6 @@ public class User extends AbstractIdentity implements Serializable {
     private String age;
     @Column(name = "rating", table = "t_rating")
     private double rating;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> roles = new HashSet<>();
-    @OneToMany(mappedBy = "onUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Review> reviewsOnUser = new HashSet<>();
-    @OneToMany(mappedBy = "byUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Review> reviewsByUser = new HashSet<>();
+
 
 }

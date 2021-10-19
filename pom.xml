@@ -5,7 +5,8 @@
 	<modules>
 		<module>ratinginit</module>
 		<module>core</module>
-	</modules>
+        <module>paymentadsprocessing</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -110,7 +111,11 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.12.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.2</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
