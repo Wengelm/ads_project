@@ -9,6 +9,7 @@ import com.senla.ads.exception.UserAlreadyExistAuthenticationException;
 import com.senla.ads.repository.RoleRepository;
 import com.senla.ads.repository.UserRepository;
 import com.senla.ads.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -58,23 +60,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public User getUserById(Long id) {
 
         return userRepository.getById(id);
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public User getUserByLogin(String login) {
         return userRepository.getUserByLogin(login);
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
 
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
@@ -86,11 +92,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public User changeRole(Long id, String role) {
         User user = userRepository.getById(id);
         Role role1 = roleRepository.getRoleByName(RoleType.valueOf(role));
@@ -100,6 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public User removeRole(Long id, String role) {
         User user = userRepository.getById(id);
         try {

@@ -1,6 +1,7 @@
 package com.senla.ads.filter;
 
 import com.senla.ads.util.JwtManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import static io.jsonwebtoken.lang.Strings.hasText;
 
 @Component
+@Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
   public static final String AUTHORIZATION = "Authorization";
@@ -31,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        logger.info("do filter...");
+        log.info("do filter...");
         String token = getTokenFromRequest(request);
         if (token != null && jwtProvider.validateToken(token)) {
             String userLogin = jwtProvider.getLoginFromToken(token);
@@ -47,6 +49,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (hasText(bearer) && bearer.startsWith("Bearer ")) {
             return bearer.substring(7);
         }
+        log.info("incorrect token from request");
         return null;
     }
 }

@@ -21,7 +21,4 @@ public class AdPaymentStatus extends AbstractIdentity {
 
     private boolean isPaid;
     private LocalDate untilPaied;
-    @JsonIgnore
-    @OneToOne
-    private Ad ad;
 }

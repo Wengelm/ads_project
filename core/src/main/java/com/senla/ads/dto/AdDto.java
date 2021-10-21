@@ -17,6 +17,7 @@ public class AdDto {
     private UserDto user;
     private LocalDate createdDate;
     private StatusDto status;
+    private AdPaymentStatusDto adPaymentStatus;
 
 
 }
