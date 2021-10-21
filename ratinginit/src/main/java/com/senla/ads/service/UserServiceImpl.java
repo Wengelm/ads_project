@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
         double countUserGrade = reviews.stream().mapToInt(Review::getGrade).sum();
         double tmpUserRating = countUserGrade / reviews.size();
         user.setRating(tmpUserRating);
-
         userRepository.save(user);
 
     }

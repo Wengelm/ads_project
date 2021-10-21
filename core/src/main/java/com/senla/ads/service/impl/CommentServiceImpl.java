@@ -24,8 +24,6 @@ public class CommentServiceImpl implements CommentService {
     public Comment save(Comment comment) {
 
         Comment c = commentRepository.save(comment);
-        System.out.println(c.getText());
-
         return c;
     }
 

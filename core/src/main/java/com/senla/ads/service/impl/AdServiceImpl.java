@@ -96,7 +96,6 @@ public class AdServiceImpl implements AdService {
         try {
 
             List<Ad> adList = adRepository.findAll();
-
             adList.sort(Comparator.comparing((Ad ad) -> ad.getAdPaymentStatus().isPaid())
                     .thenComparingDouble((Ad ad) -> ad.getUser().getRating()).reversed());
             log.info("Finded all ads");

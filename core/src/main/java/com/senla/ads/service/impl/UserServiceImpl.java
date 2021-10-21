@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-@Service
+@Service("userService")
 @Slf4j
 public class UserServiceImpl implements UserService {
 
